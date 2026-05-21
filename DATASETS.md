@@ -8,3 +8,5 @@
 [CHIRPS V3](https://chc.ucsb.edu/data/chirps3)
 
 - [User-friendly visualization of Chirps V3](https://earlywarning.usgs.gov/fews/ewx/index.html)
+
+[Uganda Administrative Boundaries][https://data.humdata.org/dataset/cod-ab-uga]
