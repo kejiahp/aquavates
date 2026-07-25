@@ -26,6 +26,19 @@ Rainfall: catchment mean is the reasonable default, but it's a real choice, not 
 (b) you plan spatially-aware features (upstream vs downstream, distance-weighted)
 (c) you're going toward a CNN/spatial model rather than tabular.
 
+# TODO
+
+- Do some EDA and data visualization.
+- Mock the flood occurences intelligently (Use public records to scrape flood occurences e.g. from websites, article maybe social media)
+- Try using the india dataset or what they did in the paper shiny shared.
+  - Train the model on the india dataset replicate the result.
+  - Train the model on uganda dataset and generate predictions.
+  - JUST REPLICATE THE PAPER
+- Make Anthony Harris give you a threshold
+- Expand on the machine learning approach to flood even more in the Literature review, touch multiple model types Deep Learning. etc. Evaluate the strenghts and limitations of the various models and how the compare against each other.
+- Change System Ana & SRS to Methodology.
+- Checkout [https://www.litmaps.com](https://www.litmaps.com)
+
 # Conclusion
 
 - If they start recording floods that could be integrated into the system more accuracy
