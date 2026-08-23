@@ -10,3 +10,11 @@
 - [User-friendly visualization of Chirps V3](https://earlywarning.usgs.gov/fews/ewx/index.html)
 
 [Uganda Administrative Boundaries][https://data.humdata.org/dataset/cod-ab-uga]
+
+# Flood Labeled dates
+
+[Desinventar — Uganda Flood Occurences](https://www.desinventar.net/DesInventar/profiletab.jsp?countrycode=uga&continue=y)
+
+[Public EM-Dat](https://public.emdat.be)
+
+[Global Flood Database](https://global-flood-database.cloudtostreet.info/#interactive-map)
