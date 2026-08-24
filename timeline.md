@@ -120,7 +120,7 @@ Regarding BUKWO and KWEEN, let's remove these districts from the dataframe as th
 
 As for the expansion to day spans cap of 21 days. I want you to reduce that to 7 days as the rainfall data from CHIRPS doesn't shows the span is too large and includes days with little rainfall.
 
-# CHIRPS dataset preprocessing
+# CHIRPS & ERA5 dataset preprocessing
 
 ## CHIRPS dataset consolidation
 
@@ -129,9 +129,7 @@ First thing we will work on is merging the chirps rainfall datasets into a singl
 
 For the duplicate dated MBALE records, this is because during extraction the uganda Mbale district was divided into two Mbale municipality and the general Mbale district (Mbale municipality is within the general Mbale district). Firstly check if you can differentiate between the two, If you can remove the Mbale municipality records from the dataset keeping only the general Mbale district as this already includes the municipality grid cells.
 
-# ERA5 dataset preprocessing
-
-## ERA5 dataset consolidation
+## CHIRPS class weights to fix Imbalance
 
 # Janusz Recommendation
 

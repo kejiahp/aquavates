@@ -1,0 +1,17 @@
+{
+  "source": "dataset/flood_training_data.csv",
+  "split_boundary": "2014-03-01",
+  "train_rows": 38799,
+  "train_positives": 83,
+  "train_negatives": 38716,
+  "imbalance_ratio": 466.46,
+  "keras_class_weight": {
+    "0": 0.501072,
+    "1": 233.7289
+  },
+  "keras_class_weight_damped": {
+    "0": 1.0,
+    "1": 21.5976
+  },
+  "pytorch_pos_weight": 466.46
+}
