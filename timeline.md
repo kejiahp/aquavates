@@ -176,6 +176,28 @@ EM-DAT's inclusion criteria will hurt you.
 - An event only enters EM-DAT if it meets a threshold — broadly 10+ deaths, 100+ affected, a declared state of emergency, or an international assistance appeal.
 - Ordinary damaging floods in Mbale that displace a few dozen households simply won't be there.
 
+# 26th August 2026
+
+Trained all the models poor precision to accuracy. I want to raise the model performance. The major issue with poor performance is the data at a daily resolution we have a total of 48,605 records with 121 flood units, ratio: 400:1.
+
+## What we will do to improve performance
+
+- Use a monthly or Half-monthly target
+
+| Resolution | Units  | Flood units | Prevalence | Ratio |
+| ---------- | ------ | ----------- | ---------- | ----- |
+| day        | 48,605 | 121         | 0.25%      | 400:1 |
+| week       | 7,469  | 83          | 1.11%      | 88:1  |
+| half-month | 3,444  | 83          | 2.41%      | 40:1  |
+| month      | 1,722  | 73          | 4.24%      | 22:1  |
+
+Half-monthly lands at 40:1 — inside the 30:1–100:1 band we originally wanted and couldn't reach by filtering. You keep 83 of 121 flood units at weekly, 83 at half-monthly, 73 at monthly. It also dissolves the month-precise date problem, since a date wrong by a few days lands in the right fortnight.
+
+That single change is why the paper's numbers look healthy: they worked monthly. Comparing your daily result against their monthly one was never like-for-like.
+
+- Include soil moisture from TAMSAT into the dataset and see how it performs
+- Restrict to 2005+. Costs 2 flood units, removes five reporting-artefact flood-free years.
+
 # What they didn't do?
 
 Four models, all as binary classifiers on the same dataset: a deep neural network, plus SVM, Naive Bayes and KNN as comparison baselines.
