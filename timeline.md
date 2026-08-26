@@ -129,7 +129,38 @@ First thing we will work on is merging the chirps rainfall datasets into a singl
 
 For the duplicate dated MBALE records, this is because during extraction the uganda Mbale district was divided into two Mbale municipality and the general Mbale district (Mbale municipality is within the general Mbale district). Firstly check if you can differentiate between the two, If you can remove the Mbale municipality records from the dataset keeping only the general Mbale district as this already includes the municipality grid cells.
 
+## Determine empirical threshold for negative removal
+
+**Result**
+Threshold: 5.3 mm of 15-day antecedent rainfall. Negative district-days below it were removed; positives were never filtered.
+
+- Derived in empirical_rainfall_threshold.ipynb as the largest threshold retaining ≥99% of positives (it retained 100%).
+- 15-day window chosen on AUC (0.710) over 1/2/3/5/7-day alternatives.
+- Applied in chirps_preprocessing.ipynb: removed 3,621 of 52,105 negatives (6.9%), prevalence 0.232% → 0.249%, ratio 400:1.
+- 88% of removals fell in December–January–February, since those are the dry months.
+
+only negatives were removed. Flood days below 5.3 mm were kept — one was (2014-03-11 MBALE, 5.295 mm).
+
 ## CHIRPS class weights to fix Imbalance
+
+# 25th August 2026
+
+## EDA on the split training data before actual training
+
+Spatial structure — Skipped this step
+Per-district prevalence, rainfall and temperature climatology, and positives per district-year. Whether prevalence is uniform (it isn't — MBALE 26 positives, KAPCHORWA 8) determines whether district belongs in the model as a categorical, and whether per-district normalisation makes sense.
+
+My reasoning: We already know it isn't but for simplicity we will keep it as categorical. I don't want to fix imbalances in the various 7 districts of interest.
+
+## Training Models
+
+### DNN
+
+### LSTM
+
+### Naive Bayes
+
+### SVM
 
 # Janusz Recommendation
 
@@ -138,16 +169,43 @@ Include other statistical models e.g. Support Vector Machine(SVM), Bayes Bayesia
 - Separate records for training and testing.
 - Do some EDA on the rainfall and flooding datasets.
 
-# Questions
-
-- Should I use the flood datasets spanning multiple months e.g. Mbale, Bududa, Manafwa?
-
 ## Issues with EM-DAT
 
 EM-DAT's inclusion criteria will hurt you.
 
 - An event only enters EM-DAT if it meets a threshold — broadly 10+ deaths, 100+ affected, a declared state of emergency, or an international assistance appeal.
 - Ordinary damaging floods in Mbale that displace a few dozen households simply won't be there.
+
+# What they didn't do?
+
+Four models, all as binary classifiers on the same dataset: a deep neural network, plus SVM, Naive Bayes and KNN as comparison baselines.
+
+**The DNN**, which is the one they present as their contribution:
+
+- Three inputs: rainfall, maximum temperature, minimum temperature
+- Three hidden layers, ten neurons each
+- One output layer, classifying flood occurrence as 1 or 0
+- LeakyReLU activation in the hidden layers, Softmax at the output
+- Trained for 10,000 epochs
+- Weights adjusted by error backpropagation
+
+They discuss ReLU at length in the theory section and justify it over sigmoid and tanh, then state LeakyReLU in the implementation, so the two sections do not quite line up.
+
+**The baselines** are described only at the level of textbook theory. For KNN they mention k = √n as a starting point and cross validation to tune k, with Euclidean distance chosen over Manhattan, Chebyshev and cosine. For SVM and Naive Bayes they give the mathematics but no implementation parameters. Built with Python, using Keras, Pandas and NumPy.
+
+**Data and evaluation.** About 3,000 monthly records from India Water Portal, covering ten districts each in Bihar and Odisha, 1990 to 2002. Metrics were accuracy, precision, recall, F1 and MCC. Results were reported twice: single-run tables, where the DNN reached 91.18% accuracy, and means over 20 runs, where the DNN averaged 89.71% against 87.86% for Naive Bayes, 87.05% for SVM and 86.25% for KNN.
+
+**What they do not report**, which matters for your replication because each gap is somewhere you can improve:
+
+- No train/test split ratio, and no validation set
+- No mention of chronological splitting; the 20 averaged runs imply random splits, which leaks information in time series data
+- No learning rate, optimiser, batch size or loss function
+- No early stopping or regularisation, so 10,000 epochs on 3,000 rows carries a clear overfitting risk
+- No hyperparameter search for the layer or neuron counts, which appear simply asserted
+- Class imbalance explicitly not addressed, which they list as their own future work
+- Month is discussed as important because of the monsoon, but the DNN takes only three inputs, so it appears to have been left out
+
+So a faithful replication means three inputs, three hidden layers of ten neurons, LeakyReLU, softmax, backpropagation. Everything in the list above you will have to specify yourself, and each choice is worth a sentence of justification in Chapter 3 noting that the source paper is silent on it.
 
 # Future improvements
 
