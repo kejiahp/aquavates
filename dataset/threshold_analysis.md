@@ -15,12 +15,12 @@ districts. No model is trained here.
 
 **Rainfall** (`dataset/chirps_daily_rainfall.csv`)
 
-- 92,043 rows, 9 districts
+- 71,589 rows, 7 districts
 - Range: 1998-01-01 to 2025-12-31
-- `rain_mean`: min 0.00, max 75.48, mean 4.83 mm/day
+- `rain_mean`: min 0.00, max 65.38, mean 4.92 mm/day
 - Nulls: 0; negative values: 0; duplicated district-days: 0
 
-The rainfall file covers 9 districts and the labels 7. **BUKWO, KWEEN are excluded** — they were removed from the study area during label preprocessing as high-massif, landslide-dominated districts with 1-2 records each. Keeping their rainfall would add districts that can only ever contribute negatives.
+The rainfall file covers 7 districts and the labels 7. ** are excluded** — they were removed from the study area during label preprocessing as high-massif, landslide-dominated districts with 1-2 records each. Keeping their rainfall would add districts that can only ever contribute negatives.
 
 Study area: BUDUDA, BULAMBULI, BUTALEJA, KAPCHORWA, MANAFWA, MBALE, SIRONKO
 

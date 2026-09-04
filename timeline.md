@@ -168,6 +168,8 @@ Include other statistical models e.g. Support Vector Machine(SVM), Bayes Bayesia
 
 - Separate records for training and testing.
 - Do some EDA on the rainfall and flooding datasets.
+- Change the window of time to monthly or half-monthly, add soil moisture data.
+  - Be cause of the lack of real data we will not be moving on to making a Model-as-a-Service.
 
 ## Issues with EM-DAT
 
